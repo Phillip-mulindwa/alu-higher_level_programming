@@ -1,60 +1,47 @@
 #!/usr/bin/python3
+# 9-base_geometry.py
+"""A python module
+that creates an empty
+class
 """
-This module defines a BaseGeometry class.
-"""
 
 
-class BaseGeometry:
+class BaseGeometry():
+    """An empty class
+    called BaseGeometry
     """
-    This module defines a BaseGeometry class.
-    """
-
-    def __init__(self, width, height):
-        """
-        Initializes the Rectangle with the specified width and
-        height after validation.
-        """
-        self.__height = height
-        self.__width = width
-
-    def __str__(self):
-        """
-        Returns a string representation of the Rectangle instance.
-
-        The string is formatted as "width/height".
-        """
-        return f"[Rectangle] {self.__width}/{self.__height}"
+    def __init__(self, do_print=False):
+        if do_print:
+            self.count = 1
 
     def area(self):
-        """
-        Calculates the area of the rectangle.
-        """
-        return self.__height * self.__width
+        raise Exception("area() is not implemented")
 
     def integer_validator(self, name, value):
-        """
-        Validates that the provided value is an integer and greater than 0.
-        """
-
-        if type(value) is not int:
-            raise TypeError(f"{name} must be an integer")
-
-        if value <= 0:
-            raise ValueError(f"{name} must be greater than 0")
-
+        self.name = name
+        if not type(value) == int:
+            raise TypeError(f"{self.name} must be an integer")
+        elif value <= 0:
+            raise ValueError(f"{self.name} must be greater than 0")
+        else:
+            return value
 
 
 class Rectangle(BaseGeometry):
+    """The class Recatangle that
+    inherits the class BaseGeometry
     """
-    A class used to represent a Rectangle, inheriting from BaseGeometry.
-    """
-
     def __init__(self, width, height):
+        """The initialization method
+        of the class Rectangle using the
+        class basegeometry method called
+        integer_validator()
         """
-        Initialize a new Rectangle instance.
-        """
-        super().__init__(width, height)
-        self.integer_validator("width", width)
-        self.integer_validator("height", height)
-        self.__width = width
-        self.__height = height
+        self.__width = self.integer_validator("width", width)
+        self.__height = self.integer_validator("height", height)
+
+    def area(self):
+        return self.__width * self.__height
+
+    def __str__(self):
+            return f"[Rectangle] {self.__width}/{self.__height}"
